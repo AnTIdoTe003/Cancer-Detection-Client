@@ -1,42 +1,41 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-
-function App() {
-  return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
-  );
+import React, { useState }   from "react";
+import axios from 'axios'
+import Popup from "./components/Popup/Popup";
+import Loader from "./components/Loader/Loader";
+const App =()=>{
+    const [response, setResponse]= useState({})
+    const [trigger, setTrigger] = useState(false)
+    const [loading, setLoading] = useState(false);
+   const handleSubmit=async()=>{
+       await axios.post('http://localhost:5000/api/predict', {"name":"debmalya"} ).then((res)=>{setResponse(res)}).catch((error)=>{console.log(error)})
+       setLoading(true);
+       setTimeout(() => {
+         setLoading(false);
+       }, 3000);
+        setTrigger(true)
+   }
+   console.log(response)
+//    console.log(response.data.prediction)
+//       console.log(response.data.data);
+    return (
+      <div>
+        <button onClick={() => handleSubmit()}>Submit</button>
+        {loading ? (
+          <>
+            <Loader></Loader>
+          </>
+        ) : (
+          <>
+            <Popup
+              data={response.data}
+              trigger={trigger}
+              setTrigger={setTrigger}
+            />
+          </>
+        )}
+        <p>Cancer Detection</p>
+      </div>
+    );
 }
 
-export default App;
+export default  App
