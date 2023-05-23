@@ -11,7 +11,7 @@ const Home = () => {
   const [image, setImage] = useState(' ');
 
   // Checking whether the object is empty or not
-
+    
   //   Image handler
   const handleImage = e => {
     console.log(e.target.files);
@@ -29,7 +29,7 @@ const Home = () => {
       .post('http://127.0.0.1:5000/predict', formDatab)
       
     if (res.status === 200) {
-        setResponse(res)
+    setResponse(res)
       setTrigger(true);
       setLoading(false);
     }
@@ -47,7 +47,6 @@ const Home = () => {
           </div>
           <form onSubmit={e => handleSubmit(e)} className="form">
             <input
-              className="self-center"
               accept="image/png, image/gif, image/jpeg"
               type="file"
               id="file"
