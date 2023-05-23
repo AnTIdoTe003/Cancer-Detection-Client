@@ -38,13 +38,13 @@ const dummyData = [
     <>
       <div className="popup-wrapper">
         <div className="popup-content" ref={ref}>
-          <p> {props.data.prediction} </p>
+          {/* <p> {props.data.prediction} </p> */}
           <p>
             {
                 dummyData.filter((ele)=>{ return ele.number == props.data.prediction}).map((ele)=>{
                     return(
                         <>
-                        <p>{ele.type}</p>
+                        <p>Person has{ele.type}</p>
                         </>
                     )
                 })

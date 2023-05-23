@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Popup from './components/Popup/Popup';
 import Loader from './components/Loader/Loader';
-import '../src/styles/home.scss'
+import '../src/styles/home.scss';
 const Home = () => {
-
-    // State variables
+  // State variables
   const [response, setResponse] = useState({});
   const [trigger, setTrigger] = useState(false);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(' ');
 
-//   Image handler
+
+    // Checking whether the object is empty or not
+    const isObjectEmpty = response => {
+      return Object.keys(response).length === 0;
+    };
+  
+  //   Image handler
   const handleImage = e => {
     console.log(e.target.files);
     setImage(e.target.files[0]);
   };
 
-// Submission Handler
+  // Submission Handler
   const handleSubmit = async e => {
     e.preventDefault();
     const formEle = document.querySelector('form');
@@ -31,10 +36,9 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 60000);
+    if(isObjectEmpty){
+        setLoading(true)
+    }
     setTrigger(true);
   };
   console.log(response);
@@ -48,7 +52,7 @@ const Home = () => {
               Upload <span>Image</span>
             </h3>
           </div>
-          <form onSubmit={e => handleSubmit(e)} className="">
+          <form onSubmit={e => handleSubmit(e)} className="form">
             <input
               className="self-center"
               accept="image/png, image/gif, image/jpeg"
@@ -57,14 +61,10 @@ const Home = () => {
               name="file"
               onChange={handleImage}
             />
-            <button
-              className="bg-red-100 p-4 rounded-lg w-[10rem]"
-              type="submit"
-            >
+            <button className="" type="submit">
               Submit
             </button>
           </form>
-
           {/* conditional loader */}
           {loading ? (
             <>
