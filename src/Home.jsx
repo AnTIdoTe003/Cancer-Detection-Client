@@ -11,7 +11,6 @@ const Home = () => {
   const [image, setImage] = useState(' ');
 
   // Checking whether the object is empty or not
- 
 
   //   Image handler
   const handleImage = e => {
@@ -26,16 +25,11 @@ const Home = () => {
     const formDatab = new FormData(formEle);
     formDatab.append('image', image);
     setLoading(true);
-    await axios
+    const res=await axios
       .post('http://127.0.0.1:5000/predict', formDatab)
-      .then(res => {
-        setResponse(res);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    if (response.status === 200) {
+      
+    if (res.status === 200) {
+        setResponse(res)
       setTrigger(true);
       setLoading(false);
     }
