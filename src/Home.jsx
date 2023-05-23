@@ -10,12 +10,9 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(' ');
 
+  // Checking whether the object is empty or not
+ 
 
-    // Checking whether the object is empty or not
-    const isObjectEmpty = response => {
-      return Object.keys(response).length === 0;
-    };
-  
   //   Image handler
   const handleImage = e => {
     console.log(e.target.files);
@@ -28,6 +25,7 @@ const Home = () => {
     const formEle = document.querySelector('form');
     const formDatab = new FormData(formEle);
     formDatab.append('image', image);
+    setLoading(true);
     await axios
       .post('http://127.0.0.1:5000/predict', formDatab)
       .then(res => {
@@ -36,10 +34,11 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
-    if(isObjectEmpty){
-        setLoading(true)
+
+    if (response.status === 200) {
+      setTrigger(true);
+      setLoading(false);
     }
-    setTrigger(true);
   };
   console.log(response);
   return (
