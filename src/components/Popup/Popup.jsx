@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './style.scss';
+import { Link } from 'react-router-dom';
 const Popup = (props) => {
 const dummyData = [
   {
@@ -42,19 +43,22 @@ const dummyData = [
           <p>
             {
                 dummyData.filter((ele)=>{ return ele.number == props.data.prediction}).map((ele)=>{
-                    return(
-                        <>
-
-                        {
-                            ele.number != '2'?(
-
-                              <p>Patient is suffering due to {ele.type} cancer </p>
-                            ):(
-                              <p>Patient is normal. No cancer is detected</p>
-                            )
-                        }
-                        </>
-                    )
+                    return (
+                      <>
+                        {ele.number != '2' ? (
+                          <div>
+                            <p>
+                              Patient is suffering due to {ele.type} cancer{' '}
+                            </p>
+                            <Link to={'/doctor-directory'}>
+                              <button>Consult doctor</button>
+                            </Link>
+                          </div>
+                        ) : (
+                          <p>Patient is normal. No cancer is detected</p>
+                        )}
+                      </>
+                    );
                 })
             }
           </p>
