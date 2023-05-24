@@ -50,6 +50,8 @@ const dummyData = [
                             style={{
                               display: 'flex',
                               justifyContent: 'center',
+                              flexDirection:"column",
+                              alignItems: 'center',
                             }}
                           >
                             <p>
