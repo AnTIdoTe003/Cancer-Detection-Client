@@ -46,12 +46,26 @@ const dummyData = [
                     return (
                       <>
                         {ele.number != '2' ? (
-                          <div>
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                            }}
+                          >
                             <p>
                               Patient is suffering due to {ele.type} cancer{' '}
                             </p>
                             <Link to={'/doctor-directory'}>
-                              <button>Consult doctor</button>
+                              <button
+                                style={{
+                                  background: 'white',
+                                  color: '#cc66ff',
+                                  padding:"10px",
+                                  borderRadius:"6px"
+                                }}
+                              >
+                                Consult doctor
+                              </button>
                             </Link>
                           </div>
                         ) : (
