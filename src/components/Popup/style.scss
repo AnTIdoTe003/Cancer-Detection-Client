@@ -14,12 +14,16 @@
     z-index: 100;
     .popup-content{
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 32px;
-        width: 100%;
+        width: 50%;
         max-width: 768px;
         height: 30vh;
         border-radius: 6px;
-        background-color: wheat;      
+        color: white;
+        background-color: #cc66ff;      
         .close-btn{
             position: absolute;
             top: 16px;

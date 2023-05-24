@@ -59,9 +59,9 @@ const Home = () => {
           </form>
           {/* conditional loader */}
           {loading ? (
-            <>
+          
               <Loader></Loader>
-            </>
+            
           ) : (
             <>
               <Popup

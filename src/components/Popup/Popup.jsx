@@ -44,7 +44,15 @@ const dummyData = [
                 dummyData.filter((ele)=>{ return ele.number == props.data.prediction}).map((ele)=>{
                     return(
                         <>
-                        <p>Person has{ele.type}</p>
+
+                        {
+                            ele.number != '2'?(
+
+                              <p>Patient is suffering due to {ele.type} cancer </p>
+                            ):(
+                              <p>Patient is normal. No cancer is detected</p>
+                            )
+                        }
                         </>
                     )
                 })
